@@ -1,16 +1,21 @@
-let express = require("express"); //require is the same as import
-const cors = require("cors");
-const { Pool } = require("pg");
-require("dotenv").config();
+import express from "express";
+import cors from "cors";
+import { Pool } from "pg";
+import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
 
-let app = express();
+dotenv.config();
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const app = express();
 app.use(cors());
 app.use(express.json());
 
 const pool = new Pool({
-  connectionString: import.meta.env.DATABASE_URL,
+  connectionString: process.env.DATABASE_URL, // Changed to process.env for CommonJS
   ssl: {
-    require: true,
+    rejectUnauthorized: false, // Changed to false as 'require' is a reserved keyword in ESM
   },
 });
 
