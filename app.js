@@ -1,22 +1,19 @@
 import express from "express";
 import cors from "cors";
-import pkg from "pg";
-const { Pool } = pkg;
+import pg from "pg";
+const { Pool } = pg;
 import dotenv from "dotenv";
-import path from "path";
-import { fileURLToPath } from "url";
 
 dotenv.config();
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 app.use(cors());
 app.use(express.json());
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL, // Changed to process.env for CommonJS
+  connectionString: process.env.DATABASE_URL,
   ssl: {
-    rejectUnauthorized: false, // Changed to false as 'require' is a reserved keyword in ESM
+    rejectUnauthorized: false,
   },
 });
 
