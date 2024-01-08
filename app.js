@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
-import { Pool } from "pg";
+import pkg from "pg";
+const { Pool } = pkg;
 import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
