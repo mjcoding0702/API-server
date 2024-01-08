@@ -1,5 +1,4 @@
 let express = require("express"); //require is the same as import
-let path = require("path");
 const cors = require("cors");
 const { Pool } = require("pg");
 require("dotenv").config();
@@ -137,11 +136,11 @@ app.put("/posts/:id", async (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname + "/index.html"));
+  res.send("Hello World");
 });
 
 app.use((req, res) => {
-  res.status(404).sendFile(path.join(__dirname + "/404.html"));
+  res.send("Page not found");
 });
 
 app.listen(3000, () => {
